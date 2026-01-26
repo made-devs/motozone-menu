@@ -21,8 +21,8 @@ const promos = [
     desc: "Gratis Dyno Run setiap pengerjaan servis besar & bore-up mesin.",
     details:
       "Dapatkan analisis performa mesin akurat menggunakan mesin Dyno terbaru kami. Berlaku untuk semua jenis motor sport & matic 150cc ke atas.",
-    cover: "/promo/cover-special1.webp",
-    image: "/promo/special1.webp", // Updated image path
+    cover: "/Promo/cover-special1.webp",
+    image: "/Promo/special1.webp", // Updated image path
   },
   {
     id: 2,
@@ -32,8 +32,8 @@ const promos = [
     desc: "Hilangkan getaran pada stang. Gratis setiap penggantian ban luar.",
     details:
       "Berkendara lebih stabil dan aman. Gratis balancing komputer untuk setiap pembelian ban merek Pirelli, Michelin, atau Battlax.",
-    cover: "/promo/cover-special2.webp",
-    image: "/promo/special2.webp", // Updated image path
+    cover: "/Promo/cover-special2.webp",
+    image: "/Promo/special2.webp", // Updated image path
   },
   {
     id: 3,
@@ -43,8 +43,8 @@ const promos = [
     desc: "Motor kinclong proteksi maksimal. Gratis setiap servis rutin paket gold.",
     details:
       "Cuci motor detail dengan shampoo pH balanced dan finishing coating nano shield untuk perlindungan cat tahan lama.",
-    cover: "/promo/cover-special3.webp",
-    image: "/promo/special3.webp", // Updated image path
+    cover: "/Promo/cover-special3.webp",
+    image: "/Promo/special3.webp", // Updated image path
   },
   {
     id: 4,
@@ -54,8 +54,8 @@ const promos = [
     desc: "Riding jauh lebih nyaman dengan helm wangi dan bersih.",
     details:
       "Helm bau apek bikin pusing? Cuci helm gratis (deep clean & anti-bacterial).",
-    cover: "/promo/cover-special4.webp",
-    image: "/promo/special4.webp", // Updated image path
+    cover: "/Promo/cover-special4.webp",
+    image: "/Promo/special4.webp", // Updated image path
   },
   {
     id: 5,
@@ -65,8 +65,8 @@ const promos = [
     desc: "Hemat hingga 30% untuk bundling Kirian CVT + Remap ECU.",
     details:
       "Paket upgrade performa harian paling worth it! Termasuk setting roller, per CVT, dan tuning ECU sesuai karakter riding lo.",
-    cover: "/promo/cover-special5.webp",
-    image: "/promo/special5.webp", // Updated image path
+    cover: "/Promo/cover-special5.webp",
+    image: "/Promo/special5.webp", // Updated image path
   },
 ];
 
