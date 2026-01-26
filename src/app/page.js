@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 // Import Components
-import Header from '@/components/layout/Header';
-import BottomNav from '@/components/layout/BottomNav';
-import PromoSpecial from '@/components/home/PromoSpecial';
-import PromoGratis from '@/components/home/PromoGratis';
-import PromoSection from '@/components/home/PromoSection';
-import ServiceSection from '@/components/home/ServiceSection';
-import GalleryTeaser from '@/components/home/GalleryTeaser';
+import Header from "@/components/layout/Header";
+import BottomNav from "@/components/layout/BottomNav";
+import PromoSpecial from "@/components/home/PromoSpecial";
+import PromoGratis from "@/components/home/PromoGratis";
+import PromoSection from "@/components/home/PromoSection";
+import ServiceSection from "@/components/home/ServiceSection";
+import GalleryTeaser from "@/components/home/GalleryTeaser";
 
 gsap.registerPlugin(useGSAP);
 
@@ -23,32 +23,32 @@ export default function HomePage() {
     () => {
       const tl = gsap.timeline();
 
-      tl.from('.app-header', {
+      tl.from(".app-header", {
         y: -50,
         opacity: 0,
         duration: 0.8,
-        ease: 'power3.out',
+        ease: "power3.out",
       })
         .from(
-          '.hero-area',
-          { scale: 0.95, opacity: 0, duration: 0.8, ease: 'back.out(1.5)' },
-          '-=0.5',
+          ".hero-area",
+          { scale: 0.95, opacity: 0, duration: 0.8, ease: "back.out(1.5)" },
+          "-=0.5",
         )
         .from(
-          '.cat-item',
-          { y: 30, opacity: 0, stagger: 0.05, duration: 0.5, ease: 'back.out' },
-          '-=0.3',
+          ".cat-item",
+          { y: 30, opacity: 0, stagger: 0.05, duration: 0.5, ease: "back.out" },
+          "-=0.3",
         )
         .from(
-          '.section-entrance',
+          ".section-entrance",
           {
             y: 50,
             opacity: 0,
             duration: 0.6,
             stagger: 0.2,
-            ease: 'power2.out',
+            ease: "power2.out",
           },
-          '-=0.2',
+          "-=0.2",
         );
     },
     { scope: container },
@@ -63,17 +63,12 @@ export default function HomePage() {
       <Header />
 
       <main className="pt-6">
-        <PromoSpecial />
-        <PromoGratis />
-
         <div className="section-entrance">
-          <PromoSection />
+          <PromoSpecial />
         </div>
-
         <div className="section-entrance">
-          <ServiceSection />
+          <PromoGratis />
         </div>
-
         <div className="section-entrance">
           <GalleryTeaser />
         </div>
@@ -83,4 +78,3 @@ export default function HomePage() {
     </div>
   );
 }
-

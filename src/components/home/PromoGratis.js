@@ -192,8 +192,8 @@ export default function PromoGratis() {
         <h3 className="text-lg md:text-2xl font-orbitron font-bold text-white flex items-center gap-2">
           <Gift className="text-racing-yellow w-5 h-5 md:w-6 md:h-6" />
           <span className="leading-none">
-            VOUCHER &{" "}
-            <span className="text-racing-yellow italic">GRATISAN</span>
+            PROMO GRATIS
+            <span className="text-racing-yellow italic">GRAND OPENING</span>
           </span>
         </h3>
 
@@ -244,7 +244,7 @@ export default function PromoGratis() {
                 />
 
                 {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent opacity-90 transition-opacity group-hover:opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/60 to-transparent opacity-90 transition-opacity group-hover:opacity-80" />
 
                 {/* Content */}
                 <div className="absolute inset-0 p-4 md:p-5 flex flex-col justify-end">

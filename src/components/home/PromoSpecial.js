@@ -176,7 +176,7 @@ export default function Hero() {
             ></div>
 
             {/* Overlay Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent"></div>
 
             {/* Content */}
             <div className="relative h-full flex flex-col px-5 md:px-10 py-5 md:py-6 md:max-w-2xl justify-center">
