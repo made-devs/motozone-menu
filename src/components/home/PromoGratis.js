@@ -1,135 +1,117 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Gift } from 'lucide-react';
+import { useState, useEffect, useRef } from "react";
+import { ChevronLeft, ChevronRight, Gift } from "lucide-react";
 
 // Data Mockup: 18 Items
 const promoItems = [
   {
     id: 1,
-    title: 'VOUCHER DISCOUNT',
-    subtitle: 'DETAILING & COATING 50%',
-    image:
-      'https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&w=600&q=80',
+    title: "VOUCHER DISCOUNT",
+    subtitle: "DETAILING & COATING 50%",
+    image: "/promo/gratis1.webp",
   },
   {
     id: 2,
-    title: 'FREE NITROGEN',
-    subtitle: 'LIFETIME REFILL',
-    image:
-      'https://images.unsplash.com/photo-1578844251758-2f71da645217?auto=format&fit=crop&w=600&q=80',
+    title: "FREE NITROGEN",
+    subtitle: "LIFETIME REFILL",
+    image: "/promo/gratis2.webp",
   },
   {
     id: 3,
-    title: 'FREE QUICKWASH',
-    subtitle: 'NANO SHIELD + DETAILING',
-    image:
-      'https://images.unsplash.com/photo-1552975084-6e027cd345c2?auto=format&fit=crop&w=600&q=80',
+    title: "FREE QUICKWASH",
+    subtitle: "NANO SHIELD + DETAILING",
+    image: "/promo/gratis3.webp",
   },
   {
     id: 4,
-    title: 'VOUCHER DISCOUNT',
-    subtitle: 'PAKET KAKI KAKI 15%',
-    image:
-      'https://images.unsplash.com/photo-1568605403164-16280436d405?auto=format&fit=crop&w=600&q=80',
+    title: "VOUCHER DISCOUNT",
+    subtitle: "PAKET KAKI KAKI 15%",
+    image: "/promo/gratis4.webp",
   },
   {
     id: 5,
-    title: 'FREE COFFEE CORNER',
-    subtitle: 'MOTOZONE LOUNGE',
-    image:
-      'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=600&q=80',
+    title: "FREE COFFEE CORNER",
+    subtitle: "MOTOZONE LOUNGE",
+    image: "/promo/gratis5.webp",
   },
   {
     id: 6,
-    title: 'FREE STIKER',
-    subtitle: 'OFFICIAL MERCH',
-    image:
-      'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=600&q=80',
+    title: "FREE STIKER",
+    subtitle: "OFFICIAL MERCH",
+    image: "/promo/gratis6.webp",
   },
   {
     id: 7,
-    title: 'VOUCHER DISCOUNT',
-    subtitle: 'ENGINE SERVICE 10%',
-    image:
-      'https://images.unsplash.com/photo-1626847037657-fd3622613ce3?auto=format&fit=crop&w=600&q=80',
+    title: "VOUCHER DISCOUNT",
+    subtitle: "ENGINE SERVICE 10%",
+    image: "/promo/gratis7.webp",
   },
   {
     id: 8,
-    title: 'FREE SLEEVE',
-    subtitle: 'PROTECTOR KIT',
-    image:
-      'https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=600&q=80',
+    title: "FREE SLEEVE",
+    subtitle: "PROTECTOR KIT",
+    image: "/promo/gratis8.webp",
   },
   {
     id: 9,
-    title: 'VOUCHER DISCOUNT',
-    subtitle: 'PAKET RADIATOR 20%',
-    image:
-      'https://images.unsplash.com/photo-1624536696956-c73eef46c7f8?auto=format&fit=crop&w=600&q=80',
+    title: "VOUCHER DISCOUNT",
+    subtitle: "PAKET RADIATOR 20%",
+    image: "/promo/gratis9.webp",
   },
   {
     id: 10,
-    title: 'FREE NANO COATING',
-    subtitle: 'HEADLAMP RESTORE',
-    image:
-      'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=600&q=80',
+    title: "FREE NANO COATING",
+    subtitle: "HEADLAMP RESTORE",
+    image: "/promo/gratis10.webp",
   },
   {
     id: 11,
-    title: 'FREE VALVE CAP',
-    subtitle: 'RACING STYLE',
-    image:
-      'https://images.unsplash.com/photo-1622185135505-2d79504399d9?auto=format&fit=crop&w=600&q=80',
+    title: "FREE VALVE CAP",
+    subtitle: "RACING STYLE",
+    image: "/promo/gratis11.webp",
   },
   {
     id: 12,
-    title: 'FREE HEADLAMP',
-    subtitle: 'POLISH TREATMENT',
-    image:
-      'https://images.unsplash.com/photo-1456086272160-b28b232cd527?auto=format&fit=crop&w=600&q=80',
+    title: "FREE HEADLAMP",
+    subtitle: "POLISH TREATMENT",
+    image: "/promo/gratis12.webp",
   },
   {
     id: 13,
-    title: 'VOUCHER DISCOUNT',
-    subtitle: 'SPAREPART 10%',
-    image:
-      'https://images.unsplash.com/photo-1486262715619-01b80258e0c5?auto=format&fit=crop&w=600&q=80',
+    title: "VOUCHER DISCOUNT",
+    subtitle: "SPAREPART 10%",
+    image: "/promo/gratis13.webp",
   },
   {
     id: 14,
-    title: 'VOUCHER DISCOUNT',
-    subtitle: 'PAKET REM 15%',
-    image:
-      'https://images.unsplash.com/photo-1599368146197-2a65a3d7065f?auto=format&fit=crop&w=600&q=80',
+    title: "VOUCHER DISCOUNT",
+    subtitle: "PAKET REM 15%",
+    image: "/promo/gratis14.webp",
   },
   {
     id: 15,
-    title: 'VOUCHER DISCOUNT',
-    subtitle: 'ENGINE REBUILD 20%',
-    image:
-      'https://images.unsplash.com/photo-1597758784157-ba5dfc7c8c3e?auto=format&fit=crop&w=600&q=80',
+    title: "VOUCHER DISCOUNT",
+    subtitle: "ENGINE REBUILD 20%",
+    image: "/promo/gratis15.webp",
   },
   {
     id: 16,
-    title: 'FREE SETEL RANTAI',
-    subtitle: '+ CHAIN LUBE',
-    image:
-      'https://images.unsplash.com/photo-1563720360172-67b8f3dcebb8?auto=format&fit=crop&w=600&q=80',
+    title: "FREE SETEL RANTAI",
+    subtitle: "+ CHAIN LUBE",
+    image: "/promo/gratis16.webp",
   },
   {
     id: 17,
-    title: 'FREE ENGINE SCANNER',
-    subtitle: 'CHECKUP',
-    image:
-      'https://images.unsplash.com/photo-1614030638531-15a4b1361c46?auto=format&fit=crop&w=600&q=80',
+    title: "FREE ENGINE SCANNER",
+    subtitle: "CHECKUP",
+    image: "/promo/gratis17.webp",
   },
   {
     id: 18,
-    title: 'FREE TIRE PIT',
-    subtitle: 'INSPECTION',
-    image:
-      'https://images.unsplash.com/photo-1562920616-e6962f928a30?auto=format&fit=crop&w=600&q=80',
+    title: "FREE TIRE PIT",
+    subtitle: "INSPECTION",
+    image: "/promo/gratis18.webp",
   },
 ];
 
@@ -154,8 +136,8 @@ export default function PromoGratis() {
     };
 
     handleResize(); // Initial check
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const totalSlides = promoItems.length;
@@ -210,7 +192,7 @@ export default function PromoGratis() {
         <h3 className="text-lg md:text-2xl font-orbitron font-bold text-white flex items-center gap-2">
           <Gift className="text-racing-yellow w-5 h-5 md:w-6 md:h-6" />
           <span className="leading-none">
-            VOUCHER &{' '}
+            VOUCHER &{" "}
             <span className="text-racing-yellow italic">GRATISAN</span>
           </span>
         </h3>
@@ -278,7 +260,7 @@ export default function PromoGratis() {
 
                 {/* Number Badge */}
                 <div className="absolute top-2 right-2 md:top-3 md:right-3 text-white/10 font-orbitron font-bold text-3xl md:text-4xl">
-                  {item.id.toString().padStart(2, '0')}
+                  {item.id.toString().padStart(2, "0")}
                 </div>
               </div>
             </div>
