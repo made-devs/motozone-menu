@@ -12,6 +12,7 @@ import PromoGratis from "@/components/home/PromoGratis";
 import PromoSection from "@/components/home/PromoSection";
 import ServiceSection from "@/components/home/ServiceSection";
 import GalleryTeaser from "@/components/home/GalleryTeaser";
+import FAQSection from "@/components/home/FAQSection";
 
 gsap.registerPlugin(useGSAP);
 
@@ -50,7 +51,6 @@ export default function HomePage() {
   );
 
   return (
-    // Tambahkan 'overflow-x-hidden' dan 'w-full' di sini untuk mencegah horizontal scroll
     <div
       ref={container}
       className="pb-24 min-h-screen relative w-full overflow-x-hidden max-w-[100vw]"
@@ -69,6 +69,9 @@ export default function HomePage() {
         </div>
         <div className="section-entrance">
           <GalleryTeaser />
+        </div>
+        <div className="section-entrance">
+          <FAQSection />
         </div>
       </main>
       <BottomNav />
