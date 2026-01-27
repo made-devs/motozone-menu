@@ -128,9 +128,7 @@ export default function PromoGratis() {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1024)
-        setItemsPerScreen(3); // Desktop
-      else if (window.innerWidth >= 768)
+      if (window.innerWidth >= 768)
         setItemsPerScreen(2); // Tablet
       else setItemsPerScreen(1); // Mobile
     };

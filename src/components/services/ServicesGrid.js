@@ -30,7 +30,7 @@ const iconMap = {
 
 export default function ServicesGrid() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 animate-in fade-in slide-in-from-bottom-8 duration-700">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 animate-in fade-in slide-in-from-bottom-8 duration-700">
       {servicesData.map((service) => {
         const lowestPrice = Math.min(
           ...service.variants.map((v) => v.price.promo),

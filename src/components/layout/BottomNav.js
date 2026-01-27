@@ -23,7 +23,10 @@ export default function BottomNav() {
   };
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-black border-t border-white/10 h-20 px-6 flex justify-between items-center z-50">
+    // UBAH className DI BAWAH INI:
+    // Hapus: left-0 right-0
+    // Tambah: left-1/2 -translate-x-1/2 w-full max-w-md (Samakan max-w dengan layout.js)
+    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-3xl bg-black border-t border-white/10 h-20 px-6 flex justify-between items-center z-50 shadow-[0_-5px_20px_rgba(0,0,0,0.5)]">
       <NavItem href="/" icon={Home} label="Home" active={pathname === "/"} />
 
       <NavItem

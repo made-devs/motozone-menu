@@ -28,13 +28,6 @@ export default function GalleryTeaser() {
             Dokumentasi pengerjaan dan hasil modifikasi terbaik.
           </p>
         </div>
-        <Link
-          href="https://instagram.com"
-          target="_blank"
-          className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 hover:border-racing-yellow hover:text-racing-yellow transition-all text-xs font-orbitron text-gray-400"
-        >
-          <Instagram size={14} /> FOLLOW US
-        </Link>
       </div>
 
       {/* Bento Grid Layout */}
