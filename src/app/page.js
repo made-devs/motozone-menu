@@ -35,11 +35,6 @@ export default function HomePage() {
           "-=0.5",
         )
         .from(
-          ".cat-item",
-          { y: 30, opacity: 0, stagger: 0.05, duration: 0.5, ease: "back.out" },
-          "-=0.3",
-        )
-        .from(
           ".section-entrance",
           {
             y: 50,
@@ -69,11 +64,13 @@ export default function HomePage() {
         <div className="section-entrance">
           <PromoGratis />
         </div>
+        <div className="section-entrance mt-8">
+          <ServiceSection />
+        </div>
         <div className="section-entrance">
           <GalleryTeaser />
         </div>
       </main>
-
       <BottomNav />
     </div>
   );
