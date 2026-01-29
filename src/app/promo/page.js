@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import Header from "@/components/layout/Header";
-import BottomNav from "@/components/layout/BottomNav";
-import PageHero from "@/components/layout/PageHero";
+import Header from '@/components/layout/Header';
+import BottomNav from '@/components/layout/BottomNav';
+import PageHero from '@/components/layout/PageHero';
 // Import komponen home yang sudah ada
-import PromoSpecial from "@/components/home/PromoSpecial";
-import PromoGratis from "@/components/home/PromoGratis";
+import PromoSpecial from '@/components/home/PromoSpecial';
+import PromoGratis from '@/components/home/PromoGratis';
 
 export default function PromoPage() {
   return (
-    <div className="pb-24 min-h-screen bg-racing-dark text-white">
+    <div className="pb-24 min-h-screen  text-white">
       <Header />
 
       {/* Hero Section */}

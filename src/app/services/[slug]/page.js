@@ -1,51 +1,213 @@
-"use client";
+'use client';
 
-import { use } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { notFound } from "next/navigation";
+import { use, useState } from 'react';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import {
   ArrowLeft,
   CheckCircle,
-  Clock,
   ShieldCheck,
   Gift,
   MessageCircle,
-} from "lucide-react";
-import { servicesData } from "@/data/servicesData";
-import Header from "@/components/layout/Header";
-import BottomNav from "@/components/layout/BottomNav";
+  Maximize2,
+  X,
+  Tag,
+} from 'lucide-react';
+import { servicesData } from '@/data/servicesData';
+import Header from '@/components/layout/Header';
+import BottomNav from '@/components/layout/BottomNav';
 
-// Helper Format Rupiah
+// --- Utility Functions ---
 const formatRupiah = (val) =>
-  new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
+  new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
     maximumFractionDigits: 0,
     minimumFractionDigits: 0,
   }).format(val);
 
+// --- Sub-Components ---
+
+// 1. Image Modal Component
+const ImageModal = ({ isOpen, imageSrc, onClose }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-black/95 backdrop-blur-sm p-4 animate-in fade-in duration-300"
+      onClick={onClose}
+    >
+      <button
+        onClick={onClose}
+        className="absolute top-5 right-5 text-white/70 hover:text-racing-yellow transition-colors"
+      >
+        <X size={32} />
+      </button>
+      <div
+        className="relative max-w-4xl w-full max-h-[80vh] group"
+        onClick={(e) => e.stopPropagation()} // Prevent close when clicking image
+      >
+        <img
+          src={imageSrc}
+          alt="Preview"
+          className="w-full h-full object-contain rounded-lg border-2 border-racing-yellow/50 shadow-[0_0_50px_rgba(255,215,0,0.2)]"
+        />
+      </div>
+    </div>
+  );
+};
+
+// 2. Variant Card Component
+const VariantCard = ({ variant, coverImage, onBooking, onImageClick }) => {
+  const savings =
+    variant.price.normal > variant.price.promo
+      ? variant.price.normal - variant.price.promo
+      : 0;
+
+  const displayImage = variant.image || coverImage;
+
+  return (
+    <div className="bg-zinc-900 border border-white/10 rounded-2xl overflow-hidden hover:border-racing-yellow transition-all duration-300 flex flex-col h-full group">
+      {/* Image Area - Clean & Clickable */}
+      <div
+        className="relative aspect-square w-full overflow-hidden bg-zinc-800 cursor-zoom-in"
+        onClick={() => onImageClick(displayImage)}
+      >
+        <div
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+          style={{
+            backgroundImage: `url('${displayImage}')`,
+          }}
+        />
+        {/* Hover Overlay with Icon */}
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+          <Maximize2
+            className="text-racing-yellow drop-shadow-md transform scale-75 group-hover:scale-100 transition-transform duration-300"
+            size={32}
+          />
+        </div>
+      </div>
+
+      {/* Content Area */}
+      <div className="p-5 flex flex-col flex-grow">
+        {/* Header: Type & CC */}
+        <div className="mb-4 flexjustify-between items-start">
+          <div>
+            <p className="text-[10px] font-bold text-racing-yellow font-orbitron uppercase tracking-widest mb-1">
+              {variant.type}
+            </p>
+            <h3 className="text-2xl font-orbitron font-bold text-white uppercase">
+              {variant.cc}
+            </h3>
+          </div>
+        </div>
+
+        {/* Separator */}
+        <div className="h-px w-full bg-white/10 mb-4"></div>
+
+        {/* Price & Savings Section */}
+        <div className="mb-5">
+          {/* Savings Info Row */}
+          {savings > 0 && (
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-xs text-gray-500 line-through font-rajdhani">
+                {formatRupiah(variant.price.normal)}
+              </span>
+              <span className="bg-red-600/20 border border-red-500/30 text-red-400 px-2 py-0.5 rounded text-[10px] font-bold font-orbitron flex items-center gap-1">
+                <Tag size={10} />
+                HEMAT {formatRupiah(savings)}
+              </span>
+            </div>
+          )}
+
+          {/* Main Price */}
+          <div className="flex items-baseline gap-1">
+            <span className="text-3xl font-orbitron font-bold text-racing-yellow">
+              {formatRupiah(variant.price.promo)}
+            </span>
+          </div>
+
+          {/* Guarantee - Cleanly placed below price */}
+          <div className="flex items-center gap-2 text-xs text-green-400 mt-2 bg-green-900/10 py-1.5 px-3 rounded border border-green-500/20 w-fit">
+            <ShieldCheck size={14} />
+            <span className="font-rajdhani font-semibold tracking-wide text-gray-200">
+              {variant.details.guarantee}
+            </span>
+          </div>
+        </div>
+
+        {/* Features List */}
+        <div className="flex-grow">
+          <h4 className="font-orbitron font-bold text-[10px] text-gray-500 mb-3 uppercase tracking-wider">
+            Package Includes:
+          </h4>
+          <ul className="space-y-2 mb-4 max-h-[150px] overflow-y-auto custom-scrollbar pr-2">
+            {variant.features.map((feature, idx) => (
+              <li
+                key={idx}
+                className="flex items-start gap-2 text-xs text-gray-300 font-rajdhani"
+              >
+                <CheckCircle
+                  size={14}
+                  className="text-racing-yellow shrink-0 mt-0.5"
+                />
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Bonus Section */}
+        {variant.details.bonus && (
+          <div className="bg-gradient-to-r from-racing-yellow/10 to-transparent border-l-2 border-racing-yellow pl-3 py-2 mb-5">
+            <p className="text-[10px] font-bold text-racing-yellow font-orbitron flex items-center gap-1">
+              <Gift size={12} /> BONUS SPESIAL
+            </p>
+            <p className="text-xs text-gray-300 font-rajdhani italic">
+              {variant.details.bonus}
+            </p>
+          </div>
+        )}
+
+        {/* CTA Button */}
+        <button
+          onClick={() =>
+            onBooking(`${variant.type} ${variant.cc}`, variant.price.promo)
+          }
+          className="w-full py-3 rounded-xl bg-racing-yellow text-black hover:bg-white transition-all font-orbitron font-bold text-sm flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(255,215,0,0.2)] hover:shadow-[0_0_25px_rgba(255,255,255,0.4)] transform hover:-translate-y-0.5 active:translate-y-0"
+        >
+          <MessageCircle size={18} />
+          BOOKING SEKARANG
+        </button>
+      </div>
+    </div>
+  );
+};
+
+// --- Main Page Component ---
+
 export default function ServiceDetailPage({ params }) {
   const unwrappedParams = use(params);
   const { slug } = unwrappedParams;
-
   const service = servicesData.find((s) => s.slug === slug);
 
-  if (!service) {
-    return notFound();
-  }
+  // State for Modal
+  const [modalImage, setModalImage] = useState(null);
 
-  const handleBooking = (variantName) => {
-    const message = `Halo Admin TJM, saya mau booking paket *${service.title}* untuk varian *${variantName}*. Mohon infonya.`;
+  if (!service) return notFound();
+
+  const handleBooking = (variantName, price) => {
+    const formattedPrice = formatRupiah(price);
+    const message = `Halo Admin TJM, saya mau booking paket *${service.title}* untuk varian *${variantName}* dengan harga promo *${formattedPrice}*. Mohon infonya.`;
     window.open(
       `https://wa.me/6281234567890?text=${encodeURIComponent(message)}`,
-      "_blank",
+      '_blank',
     );
   };
 
   return (
-    <div className="min-h-screen bg-racing-dark pb-24 text-white">
-      {/* Inject Custom Style for Yellow Scrollbar */}
+    <div className="min-h-screen  pb-24 text-white">
+      {/* Styles for scrollbar */}
       <style jsx global>{`
         .custom-scrollbar::-webkit-scrollbar {
           width: 4px;
@@ -57,14 +219,18 @@ export default function ServiceDetailPage({ params }) {
           background: #ffd700;
           border-radius: 4px;
         }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: #e5c100;
-        }
       `}</style>
+
+      {/* Modal Popup */}
+      <ImageModal
+        isOpen={!!modalImage}
+        imageSrc={modalImage}
+        onClose={() => setModalImage(null)}
+      />
 
       <Header />
 
-      {/* --- HERO SECTION (Tetap Landscape) --- */}
+      {/* Hero Section */}
       <div className="relative h-[300px] md:h-[400px]">
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -83,7 +249,6 @@ export default function ServiceDetailPage({ params }) {
           >
             <ArrowLeft size={20} />
           </Link>
-
           <span className="inline-block px-3 py-1 bg-racing-yellow text-black font-orbitron text-xs font-bold rounded mb-3 w-fit">
             {service.category}
           </span>
@@ -96,125 +261,26 @@ export default function ServiceDetailPage({ params }) {
         </div>
       </div>
 
+      {/* Main Content */}
       <main className="container mx-auto px-5 mt-8 max-w-5xl">
         <div className="mb-10 text-center md:text-left">
           <h2 className="text-xl font-orbitron font-bold italic text-racing-yellow mb-2">
             "{service.tagline}"
           </h2>
-          <p className="text-gray-400 text-sm leading-relaxed">
-            Pilih varian di bawah ini sesuai dengan kapasitas mesin (CC) dan
-            tipe motor Anda untuk melihat detail paket.
+          <p className="text-gray-400 text-sm">
+            Klik gambar untuk memperbesar detail paket.
           </p>
         </div>
 
-        {/* --- VARIANTS LIST --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-in slide-in-from-bottom-8 pb-15 duration-700">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-in slide-in-from-bottom-8 duration-700">
           {service.variants.map((variant) => (
-            <div
+            <VariantCard
               key={variant.id}
-              className="bg-zinc-900 border border-white/10 rounded-2xl overflow-hidden hover:border-racing-yellow hover:shadow-[0_0_20px_-5px_rgba(255,215,0,0.2)] transition-all duration-300 flex flex-col"
-            >
-              {/* --- IMAGE AREA (ASPECT RATIO 4:5) --- */}
-              <div className="relative aspect-[4/5] w-full bg-zinc-800">
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105"
-                  style={{
-                    backgroundImage: `url('${variant.image || service.cover}')`,
-                  }}
-                />
-
-                {/* Gradient Bottom-Up agar text kebaca */}
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent opacity-90" />
-
-                <div className="absolute bottom-4 left-4 z-10 w-[90%]">
-                  <p className="text-[10px] font-bold text-gray-400 font-rajdhani uppercase mb-0">
-                    Variant
-                  </p>
-                  <h3 className="text-xl font-orbitron font-bold text-white leading-none">
-                    {variant.type}{" "}
-                    <span className="text-racing-yellow block text-2xl mt-1">
-                      {variant.cc}
-                    </span>
-                  </h3>
-                </div>
-              </div>
-
-              {/* Pricing Section */}
-              <div className="px-4 py-3 border-b border-dashed border-white/10 bg-zinc-900/50">
-                <div className="flex flex-col mb-1">
-                  {variant.price.normal > variant.price.promo && (
-                    <span className="text-[10px] text-gray-500 line-through font-rajdhani">
-                      {formatRupiah(variant.price.normal)}
-                    </span>
-                  )}
-                  <span className="text-xl font-orbitron font-bold text-racing-yellow">
-                    {formatRupiah(variant.price.promo)}
-                  </span>
-                </div>
-
-                {/* Micro Badges */}
-                <div className="flex gap-2 mt-2">
-                  <div className="flex items-center gap-1 text-[10px] text-gray-400 bg-white/5 px-1.5 py-0.5 rounded border border-white/5">
-                    <Clock size={10} className="text-racing-yellow" />
-                    {variant.details.duration}
-                  </div>
-                  <div className="flex items-center gap-1 text-[10px] text-gray-400 bg-white/5 px-1.5 py-0.5 rounded border border-white/5">
-                    <ShieldCheck size={10} className="text-racing-yellow" />
-                    {variant.details.guarantee}
-                  </div>
-                </div>
-              </div>
-
-              {/* --- SCROLLABLE FEATURES --- */}
-              <div className="p-4 flex-grow flex flex-col">
-                <h4 className="font-orbitron font-bold text-[10px] text-gray-500 mb-2 uppercase tracking-wider">
-                  Includes:
-                </h4>
-
-                {/* Wrapper Scrollable */}
-                <ul className="space-y-2 mb-3 max-h-[120px] overflow-y-auto custom-scrollbar pr-2">
-                  {variant.features.map((feature, idx) => (
-                    <li
-                      key={idx}
-                      className="flex items-start gap-2 text-[11px] text-gray-300 font-rajdhani leading-snug"
-                    >
-                      <CheckCircle
-                        size={12}
-                        className="text-racing-yellow shrink-0 mt-0.5"
-                      />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Bonus Section (Fixed at bottom of body before button) */}
-                {variant.details.bonus && (
-                  <div className="mt-auto bg-racing-yellow/5 border border-racing-yellow/20 rounded p-2 flex gap-2 items-start mb-4">
-                    <Gift
-                      size={14}
-                      className="text-racing-yellow shrink-0 mt-0.5"
-                    />
-                    <div>
-                      <p className="text-[10px] font-bold text-racing-yellow font-orbitron">
-                        BONUS
-                      </p>
-                      <p className="text-[10px] text-gray-400 font-rajdhani leading-tight line-clamp-2">
-                        {variant.details.bonus}
-                      </p>
-                    </div>
-                  </div>
-                )}
-
-                {/* Action Button */}
-                <button
-                  onClick={() => handleBooking(`${variant.type} ${variant.cc}`)}
-                  className="mt-auto w-full py-2.5 rounded-lg bg-yellow-400 text-black hover:bg-racing-yellow transition-colors font-orbitron font-bold text-xs flex items-center justify-center gap-2 shadow-lg"
-                >
-                  <MessageCircle size={16} />
-                  BOOKING
-                </button>
-              </div>
-            </div>
+              variant={variant}
+              coverImage={service.cover}
+              onBooking={handleBooking}
+              onImageClick={(src) => setModalImage(src)}
+            />
           ))}
         </div>
       </main>

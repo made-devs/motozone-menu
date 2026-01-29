@@ -1,117 +1,117 @@
-"use client";
+'use client';
 
-import { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight, Gift } from "lucide-react";
+import { useState, useEffect, useRef } from 'react';
+import { ChevronLeft, ChevronRight, Gift } from 'lucide-react';
 
 // Data Mockup: 18 Items
 const promoItems = [
   {
     id: 1,
-    title: "VOUCHER DISCOUNT",
-    subtitle: "DETAILING & COATING 50%",
-    image: "/Promo/gratis1.webp",
+    title: 'VOUCHER DISCOUNT',
+    subtitle: 'DETAILING & COATING 50%',
+    image: '/Promo/gratis11.webp',
   },
   {
     id: 2,
-    title: "FREE NITROGEN",
-    subtitle: "LIFETIME REFILL",
-    image: "/Promo/gratis2.webp",
+    title: 'FREE NITROGEN',
+    subtitle: 'LIFETIME REFILL',
+    image: '/Promo/gratis1.webp',
   },
   {
     id: 3,
-    title: "FREE QUICKWASH",
-    subtitle: "NANO SHIELD + DETAILING",
-    image: "/Promo/gratis3.webp",
+    title: 'FREE QUICKWASH',
+    subtitle: 'NANO SHIELD + DETAILING',
+    image: '/Promo/gratis16.webp',
   },
   {
     id: 4,
-    title: "VOUCHER DISCOUNT",
-    subtitle: "PAKET KAKI KAKI 15%",
-    image: "/Promo/gratis4.webp",
+    title: 'VOUCHER DISCOUNT',
+    subtitle: 'PAKET KAKI KAKI 15%',
+    image: '/Promo/gratis12.webp',
   },
   {
     id: 5,
-    title: "FREE COFFEE CORNER",
-    subtitle: "MOTOZONE LOUNGE",
-    image: "/Promo/gratis5.webp",
+    title: 'FREE COFFEE CORNER',
+    subtitle: 'MOTOZONE LOUNGE',
+    image: '/Promo/gratis17.webp',
   },
   {
     id: 6,
-    title: "FREE STIKER",
-    subtitle: "OFFICIAL MERCH",
-    image: "/Promo/gratis6.webp",
+    title: 'FREE STIKER',
+    subtitle: 'OFFICIAL MERCH',
+    image: '/Promo/gratis18.webp',
   },
   {
     id: 7,
-    title: "VOUCHER DISCOUNT",
-    subtitle: "ENGINE SERVICE 10%",
-    image: "/Promo/gratis7.webp",
+    title: 'VOUCHER DISCOUNT',
+    subtitle: 'ENGINE SERVICE 10%',
+    image: '/Promo/gratis13.webp',
   },
   {
     id: 8,
-    title: "FREE SLEEVE",
-    subtitle: "PROTECTOR KIT",
-    image: "/Promo/gratis8.webp",
+    title: 'FREE SLEEVE',
+    subtitle: 'PROTECTOR KIT',
+    image: '/Promo/gratis2.webp',
   },
   {
     id: 9,
-    title: "VOUCHER DISCOUNT",
-    subtitle: "PAKET RADIATOR 20%",
-    image: "/Promo/gratis9.webp",
+    title: 'VOUCHER DISCOUNT',
+    subtitle: 'PAKET RADIATOR 20%',
+    image: '/Promo/gratis14.webp',
   },
   {
     id: 10,
-    title: "FREE NANO COATING",
-    subtitle: "HEADLAMP RESTORE",
-    image: "/Promo/gratis10.webp",
+    title: 'FREE NANO COATING',
+    subtitle: 'HEADLAMP RESTORE',
+    image: '/Promo/gratis15.webp',
   },
   {
     id: 11,
-    title: "FREE VALVE CAP",
-    subtitle: "RACING STYLE",
-    image: "/Promo/gratis11.webp",
+    title: 'FREE VALVE CAP',
+    subtitle: 'RACING STYLE',
+    image: '/Promo/gratis6.webp',
   },
   {
     id: 12,
-    title: "FREE HEADLAMP",
-    subtitle: "POLISH TREATMENT",
-    image: "/Promo/gratis12.webp",
+    title: 'FREE HEADLAMP',
+    subtitle: 'POLISH TREATMENT',
+    image: '/Promo/gratis7.webp',
   },
   {
     id: 13,
-    title: "VOUCHER DISCOUNT",
-    subtitle: "SPAREPART 10%",
-    image: "/Promo/gratis13.webp",
+    title: 'VOUCHER DISCOUNT',
+    subtitle: 'SPAREPART 10%',
+    image: '/Promo/gratis8.webp',
   },
   {
     id: 14,
-    title: "VOUCHER DISCOUNT",
-    subtitle: "PAKET REM 15%",
-    image: "/Promo/gratis14.webp",
+    title: 'VOUCHER DISCOUNT',
+    subtitle: 'PAKET REM 15%',
+    image: '/Promo/gratis9.webp',
   },
   {
     id: 15,
-    title: "VOUCHER DISCOUNT",
-    subtitle: "ENGINE REBUILD 20%",
-    image: "/Promo/gratis15.webp",
+    title: 'VOUCHER DISCOUNT',
+    subtitle: 'ENGINE REBUILD 20%',
+    image: '/Promo/gratis10.webp',
   },
   {
     id: 16,
-    title: "FREE SETEL RANTAI",
-    subtitle: "+ CHAIN LUBE",
-    image: "/Promo/gratis16.webp",
+    title: 'FREE SETEL RANTAI',
+    subtitle: '+ CHAIN LUBE',
+    image: '/Promo/gratis3.webp',
   },
   {
     id: 17,
-    title: "FREE ENGINE SCANNER",
-    subtitle: "CHECKUP",
-    image: "/Promo/gratis17.webp",
+    title: 'FREE ENGINE SCANNER',
+    subtitle: 'CHECKUP',
+    image: '/Promo/gratis4.webp',
   },
   {
     id: 18,
-    title: "FREE TIRE PIT",
-    subtitle: "INSPECTION",
-    image: "/Promo/gratis18.webp",
+    title: 'FREE TIRE PIT',
+    subtitle: 'INSPECTION',
+    image: '/Promo/gratis5.webp',
   },
 ];
 
@@ -134,8 +134,8 @@ export default function PromoGratis() {
     };
 
     handleResize(); // Initial check
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const totalSlides = promoItems.length;
@@ -258,7 +258,7 @@ export default function PromoGratis() {
 
                 {/* Number Badge */}
                 <div className="absolute top-2 right-2 md:top-3 md:right-3 text-white/10 font-orbitron font-bold text-3xl md:text-4xl">
-                  {item.id.toString().padStart(2, "0")}
+                  {item.id.toString().padStart(2, '0')}
                 </div>
               </div>
             </div>

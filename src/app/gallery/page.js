@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { createPortal } from "react-dom";
-import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
-import Header from "@/components/layout/Header";
-import BottomNav from "@/components/layout/BottomNav";
-import PageHero from "@/components/layout/PageHero";
+import { useState } from 'react';
+import { createPortal } from 'react-dom';
+import { X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
+import Header from '@/components/layout/Header';
+import BottomNav from '@/components/layout/BottomNav';
+import PageHero from '@/components/layout/PageHero';
 
 // Generate Array Image 1-16
 const galleryData = Array.from({ length: 16 }, (_, i) => ({
@@ -33,7 +33,7 @@ export default function GalleryPage() {
   };
 
   return (
-    <div className="pb-28 min-h-screen bg-racing-dark text-white">
+    <div className="pb-28 min-h-screen text-white">
       <Header />
 
       {/* Reusable Hero from previous step */}
@@ -54,7 +54,7 @@ export default function GalleryPage() {
             // Sisanya tinggi normal (1 row)
             // index % 5 === 0 utk variasi tambahan biar lebih acak
             const isTall = index % 3 === 0 || index === 7;
-            const spanClass = isTall ? "row-span-2" : "row-span-1";
+            const spanClass = isTall ? 'row-span-2' : 'row-span-1';
 
             return (
               <div
