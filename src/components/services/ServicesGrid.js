@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import Link from "next/link";
+import Link from 'next/link';
 import {
   ArrowRight,
   Gauge,
@@ -8,14 +8,20 @@ import {
   Disc,
   Wrench,
   Thermometer,
-} from "lucide-react";
-import { servicesData } from "@/data/servicesData";
+  Leaf,
+  Sparkles,
+  Flag,
+  Droplets,
+  Zap,
+  Map,
+} from 'lucide-react'; // Import missing icons
+import { servicesData } from '@/data/servicesData';
 
 // Helper & Mapping
 const formatRupiah = (num) =>
-  new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
+  new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
     maximumFractionDigits: 0,
   }).format(num);
 
@@ -26,18 +32,35 @@ const iconMap = {
   Brake: Disc,
   Steering: Wrench,
   Radiator: Thermometer,
+  Eco: Leaf, // Added for Eco Smart Map
+  Clean: Sparkles, // Added for Full Clean
+  Race: Flag, // Added for Full Race Map
+  Coating: Droplets, // Added for Ride Guard Coating
+  Touring: Map, // Added for Touring
+  Wash: Droplets, // Added for Nano Ride Wash
+  'Nano Ride': Zap, // Added just in case
 };
 
 export default function ServicesGrid() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 animate-in fade-in slide-in-from-bottom-8 duration-700">
       {servicesData.map((service) => {
+        // Updated logic to find the lowest price from nested objects
         const lowestPrice = Math.min(
-          ...service.variants.map((v) => v.price.promo),
+          ...service.variants.flatMap((v) => {
+            // Check if promo price exists and is an object
+            if (typeof v.price?.promo === 'object') {
+              // Extract all values from the promo object and return them
+              return Object.values(v.price.promo);
+            }
+            // Fallback if structure is different
+            return [9999999];
+          }),
         );
+
         const bgImage = service.cover
           ? `url('${service.cover}')`
-          : `url('https://source.unsplash.com/random/400x300/?motorcycle,${service.category.split(" ")[0].toLowerCase()}&sig=${service.id}')`;
+          : `url('https://source.unsplash.com/random/400x300/?motorcycle,${service.category.split(' ')[0].toLowerCase()}&sig=${service.id}')`;
         const Icon = iconMap[service.icon] || Settings;
 
         return (
@@ -83,7 +106,7 @@ export default function ServicesGrid() {
               <div className="mt-auto pt-3 border-t border-dashed border-white/20 flex items-center justify-between">
                 <div>
                   <p className="text-[10px] text-gray-400 font-rajdhani">
-                    Best Price
+                    Mulai dari
                   </p>
                   <p className="text-racing-yellow font-bold font-orbitron text-lg">
                     {formatRupiah(lowestPrice)}
