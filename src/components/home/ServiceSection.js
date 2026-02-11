@@ -1,17 +1,35 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { ArrowRight, Grid, Plus } from "lucide-react";
-import { servicesData } from "@/data/servicesData";
+import Link from 'next/link';
+import { ArrowRight, Grid, Plus } from 'lucide-react';
+import { servicesData } from '@/data/servicesData';
 
 // Helper: Format Rupiah
 const formatRupiah = (number) => {
-  return new Intl.NumberFormat("id-ID", {
-    style: "currency",
-    currency: "IDR",
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
     maximumFractionDigits: 0,
     minimumFractionDigits: 0,
   }).format(number);
+};
+
+// Helper: get lowest promo price (supports numeric promo or object of prices)
+const getLowestPromoPrice = (service) => {
+  const prices = [];
+  service.variants.forEach((v) => {
+    const promo = v?.price?.promo;
+    if (promo == null) return;
+    if (typeof promo === 'number') {
+      prices.push(promo);
+    } else if (typeof promo === 'object') {
+      Object.values(promo).forEach((val) => {
+        if (typeof val === 'number') prices.push(val);
+      });
+    }
+  });
+  if (prices.length === 0) return 0;
+  return Math.min(...prices);
 };
 
 export default function ServiceSection() {
@@ -41,15 +59,13 @@ export default function ServiceSection() {
       {/* Grid Cards */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
         {displayedServices.map((service) => {
-          const lowestPrice = Math.min(
-            ...service.variants.map((v) => v.price.promo),
-          );
+          const lowestPrice = getLowestPromoPrice(service);
 
           // --- LOGIC GAMBAR BARU ---
           // Gunakan service.cover jika ada, jika tidak ada fallback ke Unsplash
           const bgImage = service.cover
             ? `url('${service.cover}')`
-            : `url('https://source.unsplash.com/random/400x300/?motorcycle,${service.category.split(" ")[0].toLowerCase()}&sig=${service.id}')`;
+            : `url('https://source.unsplash.com/random/400x300/?motorcycle,${service.category.split(' ')[0].toLowerCase()}&sig=${service.id}')`;
 
           return (
             <Link
