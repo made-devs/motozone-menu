@@ -1,117 +1,117 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Gift } from 'lucide-react';
+import { useState, useEffect, useRef } from "react";
+import { ChevronLeft, ChevronRight, Gift } from "lucide-react";
 
 // Data Mockup: 18 Items
 const promoItems = [
   {
     id: 1,
-    title: 'VOUCHER DISCOUNT',
-    subtitle: 'DETAILING & COATING 50%',
-    image: '/Promo/gratis11.webp',
+    title: "VOUCHER DISCOUNT",
+    subtitle: "DETAILING & COATING 50%",
+    image: "/Promo/gratis11.webp",
   },
   {
     id: 2,
-    title: 'FREE NITROGEN',
-    subtitle: 'LIFETIME REFILL',
-    image: '/Promo/gratis1.webp',
+    title: "FREE NITROGEN",
+    subtitle: "LIFETIME REFILL",
+    image: "/Promo/gratis1.webp",
   },
   {
     id: 3,
-    title: 'FREE QUICKWASH',
-    subtitle: 'NANO SHIELD + DETAILING',
-    image: '/Promo/gratis16.webp',
+    title: "FREE QUICKWASH",
+    subtitle: "NANO SHIELD + DETAILING",
+    image: "/Promo/gratis16.webp",
   },
   {
     id: 4,
-    title: 'VOUCHER DISCOUNT',
-    subtitle: 'PAKET KAKI KAKI 15%',
-    image: '/Promo/gratis12.webp',
+    title: "VOUCHER DISCOUNT",
+    subtitle: "PAKET KAKI KAKI 15%",
+    image: "/Promo/gratis12.webp",
   },
   {
     id: 5,
-    title: 'FREE COFFEE CORNER',
-    subtitle: 'MOTOZONE LOUNGE',
-    image: '/Promo/gratis17.webp',
+    title: "FREE COFFEE CORNER",
+    subtitle: "MOTOZONE LOUNGE",
+    image: "/Promo/gratis17.webp",
   },
   {
     id: 6,
-    title: 'FREE STIKER',
-    subtitle: 'OFFICIAL MERCH',
-    image: '/Promo/gratis18.webp',
+    title: "FREE STIKER",
+    subtitle: "OFFICIAL MERCH",
+    image: "/Promo/gratis18.webp",
   },
   {
     id: 7,
-    title: 'VOUCHER DISCOUNT',
-    subtitle: 'ENGINE SERVICE 10%',
-    image: '/Promo/gratis13.webp',
+    title: "VOUCHER DISCOUNT",
+    subtitle: "ENGINE SERVICE 10%",
+    image: "/Promo/gratis13.webp",
   },
   {
     id: 8,
-    title: 'FREE SLEEVE',
-    subtitle: 'PROTECTOR KIT',
-    image: '/Promo/gratis2.webp',
+    title: "FREE SLEEVE",
+    subtitle: "PROTECTOR KIT",
+    image: "/Promo/gratis2.webp",
   },
   {
     id: 9,
-    title: 'VOUCHER DISCOUNT',
-    subtitle: 'PAKET RADIATOR 20%',
-    image: '/Promo/gratis14.webp',
+    title: "VOUCHER DISCOUNT",
+    subtitle: "PAKET RADIATOR 20%",
+    image: "/Promo/gratis14.webp",
   },
   {
     id: 10,
-    title: 'FREE NANO COATING',
-    subtitle: 'HEADLAMP RESTORE',
-    image: '/Promo/gratis15.webp',
+    title: "FREE NANO COATING",
+    subtitle: "HEADLAMP RESTORE",
+    image: "/Promo/gratis15.webp",
   },
   {
     id: 11,
-    title: 'FREE VALVE CAP',
-    subtitle: 'RACING STYLE',
-    image: '/Promo/gratis6.webp',
+    title: "FREE VALVE CAP",
+    subtitle: "RACING STYLE",
+    image: "/Promo/gratis6.webp",
   },
   {
     id: 12,
-    title: 'FREE HEADLAMP',
-    subtitle: 'POLISH TREATMENT',
-    image: '/Promo/gratis7.webp',
+    title: "FREE HEADLAMP",
+    subtitle: "POLISH TREATMENT",
+    image: "/Promo/gratis7.webp",
   },
   {
     id: 13,
-    title: 'VOUCHER DISCOUNT',
-    subtitle: 'SPAREPART 10%',
-    image: '/Promo/gratis8.webp',
+    title: "VOUCHER DISCOUNT",
+    subtitle: "SPAREPART 10%",
+    image: "/Promo/gratis8.webp",
   },
   {
     id: 14,
-    title: 'VOUCHER DISCOUNT',
-    subtitle: 'PAKET REM 15%',
-    image: '/Promo/gratis9.webp',
+    title: "VOUCHER DISCOUNT",
+    subtitle: "PAKET REM 15%",
+    image: "/Promo/gratis9.webp",
   },
   {
     id: 15,
-    title: 'VOUCHER DISCOUNT',
-    subtitle: 'ENGINE REBUILD 20%',
-    image: '/Promo/gratis10.webp',
+    title: "VOUCHER DISCOUNT",
+    subtitle: "ENGINE REBUILD 20%",
+    image: "/Promo/gratis10.webp",
   },
   {
     id: 16,
-    title: 'FREE SETEL RANTAI',
-    subtitle: '+ CHAIN LUBE',
-    image: '/Promo/gratis3.webp',
+    title: "FREE SETEL RANTAI",
+    subtitle: "+ CHAIN LUBE",
+    image: "/Promo/gratis3.webp",
   },
   {
     id: 17,
-    title: 'FREE ENGINE SCANNER',
-    subtitle: 'CHECKUP',
-    image: '/Promo/gratis4.webp',
+    title: "FREE ENGINE SCANNER",
+    subtitle: "CHECKUP",
+    image: "/Promo/gratis4.webp",
   },
   {
     id: 18,
-    title: 'FREE TIRE PIT',
-    subtitle: 'INSPECTION',
-    image: '/Promo/gratis5.webp',
+    title: "FREE TIRE PIT",
+    subtitle: "INSPECTION",
+    image: "/Promo/gratis5.webp",
   },
 ];
 
@@ -134,8 +134,8 @@ export default function PromoGratis() {
     };
 
     handleResize(); // Initial check
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const totalSlides = promoItems.length;
@@ -190,7 +190,7 @@ export default function PromoGratis() {
         <h3 className="text-lg md:text-2xl font-orbitron font-bold text-white flex items-center gap-2">
           <Gift className="text-racing-yellow w-5 h-5 md:w-6 md:h-6" />
           <span className="leading-none">
-            PROMO GRATIS
+            PROMO GRATIS{" "}
             <span className="text-racing-yellow italic">GRAND OPENING</span>
           </span>
         </h3>
@@ -231,21 +231,22 @@ export default function PromoGratis() {
           {promoItems.map((item) => (
             <div
               key={item.id}
-              className="px-2 flex-shrink-0"
+              className="px-2 shrink-0"
               style={{ width: `${100 / itemsPerScreen}%` }}
             >
-              <div className="group relative h-[160px] md:h-[180px] rounded-xl overflow-hidden border border-white/10 bg-racing-dark shadow-lg">
-                {/* Background Image */}
+              {/* Card with image area forced to 4:5 and text panel below */}
+              <div className="group relative rounded-xl overflow-hidden border border-white/10 bg-racing-dark shadow-lg flex flex-col">
+                {/* Image area fixed to 4:5 */}
                 <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                  style={{ backgroundImage: `url('${item.image}')` }}
+                  className="w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                  style={{
+                    aspectRatio: "4 / 5",
+                    backgroundImage: `url('${item.image}')`,
+                  }}
                 />
 
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/60 to-transparent opacity-90 transition-opacity group-hover:opacity-80" />
-
-                {/* Content */}
-                <div className="absolute inset-0 p-4 md:p-5 flex flex-col justify-end">
+                {/* Text panel separated at bottom */}
+                <div className="p-4 md:p-5 bg-[rgba(0,0,0,0.85)]">
                   <div className="h-0.5 md:h-1 w-8 md:w-10 bg-racing-yellow mb-2 md:mb-3 rounded-full shadow-[0_0_8px_var(--color-racing-yellow)]" />
 
                   <h4 className="font-orbitron font-bold text-base md:text-lg leading-tight text-white mb-0.5 md:mb-1 line-clamp-2">
@@ -256,9 +257,9 @@ export default function PromoGratis() {
                   </p>
                 </div>
 
-                {/* Number Badge */}
-                <div className="absolute top-2 right-2 md:top-3 md:right-3 text-white/10 font-orbitron font-bold text-3xl md:text-4xl">
-                  {item.id.toString().padStart(2, '0')}
+                {/* Number Badge (over top-right of card/image) */}
+                <div className="absolute top-2 right-2 md:top-3 md:right-3 text-white/10 font-orbitron font-bold text-3xl md:text-4xl pointer-events-none">
+                  {item.id.toString().padStart(2, "0")}
                 </div>
               </div>
             </div>
