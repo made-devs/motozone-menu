@@ -440,7 +440,7 @@ export const servicesData = [
     slug: "paket-fast-lane",
     category: "Fast Service",
     tagline: "Service Cepat Performa Maksimal",
-    cover: "/gallery/gallery11.webp", // ganti sesuai asset
+    cover: "/Gallery/gallery11.webp", // ganti sesuai asset
     shortDesc:
       "Paket servis cepat untuk semua jenis motor dengan promo gratis terbanyak.",
     icon: "Fast", // sesuaikan icon yang tersedia
