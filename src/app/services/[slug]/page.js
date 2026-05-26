@@ -16,7 +16,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
-import { servicesData } from '@/data/servicesData';
+import { servicesData } from '@/data/servicesNew';
 import Header from '@/components/layout/Header';
 import BottomNav from '@/components/layout/BottomNav';
 

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { ArrowRight, Grid, Plus } from 'lucide-react';
-import { servicesData } from '@/data/servicesData';
+import { servicesData } from '@/data/servicesNew';
 
 // Helper: Format Rupiah
 const formatRupiah = (number) => {

@@ -15,7 +15,7 @@ import {
   Zap,
   Map,
 } from 'lucide-react'; // Import missing icons
-import { servicesData } from '@/data/servicesData';
+import { servicesData } from '@/data/servicesNew';
 
 // Helper & Mapping
 const formatRupiah = (num) =>
